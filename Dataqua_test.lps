@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <PathDelim Value="\"/>
+    <Version Value="11"/>
+    <BuildModes Active="Default"/>
+    <Units Count="5">
+      <Unit0>
+        <Filename Value="Dataqua_test.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
+        <CursorPos X="43" Y="7"/>
+        <UsageCount Value="21"/>
+        <Loaded Value="True"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="feature.pas"/>
+        <UnitName Value="Appliciant"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="19" Y="12"/>
+        <UsageCount Value="20"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="dataquaexample.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="DataquaExample"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="2"/>
+        <CursorPos X="15" Y="18"/>
+        <UsageCount Value="21"/>
+        <Loaded Value="True"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="applicant.pas"/>
+        <UnitName Value="Applicant"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="6"/>
+        <CursorPos Y="36"/>
+        <UsageCount Value="20"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="appliciant.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Appliciant"/>
+        <EditorIndex Value="2"/>
+        <CursorPos X="24" Y="30"/>
+        <UsageCount Value="21"/>
+        <Loaded Value="True"/>
+      </Unit4>
+    </Units>
+    <JumpHistory Count="12" HistoryIndex="11">
+      <Position1>
+        <Filename Value="dataquaexample.pas"/>
+        <Caret Line="12" Column="47"/>
+      </Position1>
+      <Position2>
+        <Filename Value="Dataqua_test.lpr"/>
+        <Caret Line="3" Column="6"/>
+      </Position2>
+      <Position3>
+        <Filename Value="Dataqua_test.lpr"/>
+        <Caret Line="3" Column="16"/>
+      </Position3>
+      <Position4>
+        <Filename Value="dataquaexample.pas"/>
+        <Caret Line="8" Column="32"/>
+      </Position4>
+      <Position5>
+        <Filename Value="appliciant.pas"/>
+        <Caret Line="16" Column="21"/>
+      </Position5>
+      <Position6>
+        <Filename Value="Dataqua_test.lpr"/>
+        <Caret Line="3" Column="34"/>
+      </Position6>
+      <Position7>
+        <Filename Value="dataquaexample.pas"/>
+        <Caret Line="15" Column="34"/>
+      </Position7>
+      <Position8>
+        <Filename Value="dataquaexample.pas"/>
+        <Caret Line="20" Column="50"/>
+      </Position8>
+      <Position9>
+        <Filename Value="appliciant.pas"/>
+        <Caret Line="30" Column="23" TopLine="6"/>
+      </Position9>
+      <Position10>
+        <Filename Value="dataquaexample.pas"/>
+        <Caret Line="15" Column="28"/>
+      </Position10>
+      <Position11>
+        <Filename Value="dataquaexample.pas"/>
+        <Caret Line="26" Column="58" TopLine="2"/>
+      </Position11>
+      <Position12>
+        <Filename Value="dataquaexample.pas"/>
+        <Caret Line="18" Column="15" TopLine="2"/>
+      </Position12>
+    </JumpHistory>
+    <RunParams>
+      <FormatVersion Value="2"/>
+      <Modes Count="0" ActiveMode=""/>
+    </RunParams>
+  </ProjectSession>
+</CONFIG>
