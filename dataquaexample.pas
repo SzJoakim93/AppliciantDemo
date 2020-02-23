@@ -25,8 +25,8 @@ implementation
 	procedure TDataquaExample.startInterview(Appliciant : TAppliciant);
   var feature : TFeature;
   begin
-    for feature in Appliciant.DoInterview do
-      if not (feature in NewEmployedMinRequestedFeatures) then
+    for feature in NewEmployedMinRequestedFeatures do
+      if not (feature in Appliciant.DoInterview) then
       begin
         Writeln('The appliciant is not success :(');
         Exit;
