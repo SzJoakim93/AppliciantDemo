@@ -12,10 +12,15 @@ private
   NewEmployedMinRequestedFeatures : TFeatures;
 
 public
+  constructor create(features : TFeatures);
   procedure startInterview(Appliciant:TAppliciant);
 end;
 
 implementation
+	constructor TDataquaExample.create(features : TFeatures);
+  begin
+  	NewEmployedMinRequestedFeatures := features;
+  end;
 
 	procedure TDataquaExample.startInterview(Appliciant : TAppliciant);
   var feature : TFeature;

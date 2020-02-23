@@ -2,10 +2,20 @@ program Dataqua_test;
 
 uses Appliciant, DataquaExample;
 
-var myAplliciant : TAppliciant;
+var
+  myAppliciant : TAppliciant;
+  dataqua : TDataquaExample;
 begin
-     myAplliciant := TAppliciant.Create();
+     dataqua := TDataquaExample.create([c, cpp, delphi]);
 
-     Readln();
+     myAppliciant := TAppliciant.Create();
+
+     myAppliciant.AddFeature(c);
+     myAppliciant.AddFeature(cpp);
+     myAppliciant.AddFeature(delphi);
+
+     dataqua.startInterview(myAppliciant);
+
+     readln();
 end.
 
