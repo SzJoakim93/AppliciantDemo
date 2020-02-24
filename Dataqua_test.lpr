@@ -15,7 +15,7 @@ var
 begin
   dataqua := TDataquaExample.Create([c, cpp, delphi]);
   appliciant_manager := TAppliciantManager.Create;
-  appliciant_manager.readAppliciants;
+  appliciant_manager.ReadAppliciants;
   quit := false;
 
   while not quit do
@@ -37,6 +37,7 @@ begin
     end;
   end;
 
+  appliciant_manager.WriteAppliciants;
   dataqua.Free;
   appliciant_manager.Destroy;
 
