@@ -2,73 +2,42 @@ program Dataqua_test;
 
 uses
 	Classes,
-
+  DataquaExample,
   Appliciant,
-  DataquaExample;
+	AppliciantManager;
 
 var
-  appliciants : TList;
-  dataqua : TDataquaExample;
-  i : byte;
-  feature : TFeature;
-
-	procedure readAppliciants;
- 	var
-  	Input : Text;
-  	Line : String[64];
-  	Feature : String[4];
-  	i : byte;
-  	new_appliciant : TAppliciant;
-	begin
-		AssignFile(Input, 'appliciants.txt');
-		Reset(Input);
-
-		while not eof(Input) do
-		begin
-  	  new_appliciant := TAppliciant.Create();
-      Readln(Input, Line);
-
-      i := 1;
-      while i <= Length(Line) do
-      begin
-			  Feature := '';
-
-        while (Line[i] <> ' ') and (i <= Length(Line)) do
-        begin
-      	  Feature := Feature + Line[i];
-          i := i + 1;
-        end;
-
-        if Feature = '0' then new_appliciant.AddFeature(c)
-        else if Feature = '1' then new_appliciant.AddFeature(cpp)
-        else if Feature = '2' then new_appliciant.AddFeature(csharp)
-        else if Feature = '3' then new_appliciant.AddFeature(delphi)
-        else if Feature = '4' then new_appliciant.AddFeature(unity)
-        else if Feature = '5' then new_appliciant.AddFeature(tcp)
-        else if Feature = '6' then new_appliciant.AddFeature(git);
-        i := i + 1;
-
-      end;
-
-      appliciants.Add(new_appliciant);
-
-		end;
-
-	Close(Input);
-end;
+	dataqua : TDataquaExample;
+  appliciant_manager : TAppliciantManager;
+  option : byte;
+  quit : boolean;
 
 begin
   dataqua := TDataquaExample.Create([c, cpp, delphi]);
-  appliciants := TList.Create();
+  appliciant_manager := TAppliciantManager.Create;
+  appliciant_manager.readAppliciants;
+  quit := false;
 
-  readAppliciants;
+  while not quit do
+  begin
+    Writeln('Add number of option');
+    Writeln('1. List applications');
+    Writeln('2. Interview an appliciant');
+    Writeln('3. Add new appliciant');
+    Writeln('4. Delete appliciant');
+    Writeln('5. Quit');
+    Readln(option);
 
-  for i := 0 to appliciants.Count-1 do
-  	dataqua.startInterview(TAppliciant(appliciants[i]));
-
-  readln();
+    case option of
+      1: appliciant_manager.ListAppliciants;
+    	2: appliciant_manager.Interview(dataqua);
+      3: appliciant_manager.AddAppliciant;
+      4: appliciant_manager.DeleteAppliciant;
+      5: quit := true;
+    end;
+  end;
 
   dataqua.Free;
-  appliciants.Free;
+  appliciant_manager.Destroy;
 
 end.

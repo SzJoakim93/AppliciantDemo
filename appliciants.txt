@@ -1,3 +1,4 @@
-0 1 2 3
-2 3 4
-1 3 5
+Adam 0 1 2 3
+Bela 2 3 4
+Csilla 1 3 5
+Kriszta 2

@@ -22,17 +22,17 @@ implementation
   	NewEmployedMinRequestedFeatures := features;
   end;
 
-	procedure TDataquaExample.startInterview(Appliciant : TAppliciant);
+	procedure TDataquaExample.startInterview(appliciant : TAppliciant);
   var feature : TFeature;
   begin
     for feature in NewEmployedMinRequestedFeatures do
-      if not (feature in Appliciant.DoInterview) then
+      if not (feature in appliciant.DoInterview) then
       begin
-        Writeln('The appliciant is not success :(');
+        Writeln(appliciant.GetName, ': The appliciant is not success :(');
         Exit;
       end;
 
-       Writeln('The appliciant success :)');
+       Writeln(appliciant.GetName, ': The appliciant success :)');
   end;
 
 end.
