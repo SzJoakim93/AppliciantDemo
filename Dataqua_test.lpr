@@ -1,10 +1,10 @@
 program Dataqua_test;
 
 uses
-	Classes,
+  Classes,
   DataquaExample,
   Appliciant,
-	AppliciantManager;
+  AppliciantManager;
 
 var
 	dataqua : TDataquaExample;
@@ -30,7 +30,7 @@ begin
 
     case option of
       1: appliciant_manager.ListAppliciants;
-    	2: appliciant_manager.Interview(dataqua);
+      2: appliciant_manager.Interview(dataqua);
       3: appliciant_manager.AddAppliciant;
       4: appliciant_manager.DeleteAppliciant;
       5: quit := true;

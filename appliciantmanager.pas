@@ -5,9 +5,9 @@ unit AppliciantManager;
 interface
 
 uses
-  Classes, SysUtils,
-  Appliciant,
-  DataquaExample;
+	Classes, SysUtils,
+	Appliciant,
+	DataquaExample;
 
 type PAppliciant = ^TAppliciant;
 

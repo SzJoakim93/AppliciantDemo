@@ -8,14 +8,14 @@ uses
   Classes, SysUtils;
 
 type
-	TFeature = (c, cpp, csharp, delphi, tcp, unity, git);
+  TFeature = (c, cpp, csharp, delphi, tcp, unity, git);
   TFeatures = Set of TFeature;
 
 type TAppliciant = class
 
 private
   Name : String[16];
-	Features : TFeatures;
+  Features : TFeatures;
 public
   constructor Create(_name : String);
 	function DoInterview : TFeatures;
