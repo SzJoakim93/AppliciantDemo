@@ -5,150 +5,161 @@ unit AppliciantManager;
 interface
 
 uses
-	Classes, SysUtils,
-	Appliciant,
-	DataquaExample;
+  Classes, SysUtils,
+  Appliciant,
+  DataquaExample;
 
-type PAppliciant = ^TAppliciant;
+type
+  PAppliciant = ^TAppliciant;
 
-type TAppliciantManager = class
-private
-	appliciants : TList;
-  function stringToEnum(feature_str : String; out Value : TFeature) : Boolean;
-  function EnumToString(feature_value : TFeature) : String;
-  function findByName(name : String) : PAppliciant;
-public
-  constructor Create;
-  destructor Destroy;
-  procedure ReadAppliciants;
-  procedure WriteAppliciants;
-  procedure ListAppliciants;
-  procedure Interview(dataqua : TDataquaExample);
-  procedure AddAppliciant;
-  procedure DeleteAppliciant;
-end;
+type
+  TAppliciantManager = class
+  private
+    appliciants: TList;
+    function stringToEnum(feature_str: string; out Value: TFeature): boolean;
+    function EnumToString(feature_value: TFeature): string;
+    function findByName(Name: string): PAppliciant;
+  public
+    constructor Create;
+    destructor Destroy;
+    procedure ReadAppliciants;
+    procedure WriteAppliciants;
+    procedure ListAppliciants;
+    procedure Interview(dataqua: TDataquaExample);
+    procedure AddAppliciant;
+    procedure DeleteAppliciant;
+  end;
 
 implementation
-  constructor TAppliciantManager.Create;
-  begin
-    appliciants := TList.Create();
+
+constructor TAppliciantManager.Create;
+begin
+  appliciants := TList.Create();
+end;
+
+destructor TAppliciantManager.Destroy;
+begin
+  appliciants.Free;
+end;
+
+function TAppliciantManager.stringToEnum(feature_str: string;
+  out Value: TFeature): boolean;
+begin
+  Result := True;
+  if (feature_str = '0') or (feature_str = 'c') then
+    Value := c
+  else if (feature_str = '1') or (feature_str = 'cpp') then
+    Value := cpp
+  else if (feature_str = '2') or (feature_str = 'csharp') then
+    Value := csharp
+  else if (feature_str = '3') or (feature_str = 'delphi') then
+    Value := delphi
+  else if (feature_str = '4') or (feature_str = 'unity') then
+    Value := unity
+  else if (feature_str = '5') or (feature_str = 'tcp') then
+    Value := tcp
+  else if (feature_str = '6') or (feature_str = 'git') then
+    Value := git
+  else
+    Result := False;
+end;
+
+function TAppliciantManager.EnumToString(feature_value: TFeature): string;
+begin
+  case feature_value of
+    c: Result := '0';
+    cpp: Result := '1';
+    csharp: Result := '2';
+    delphi: Result := '3';
+    unity: Result := '4';
+    tcp: Result := '5';
+    git: Result := '6';
+
   end;
+end;
 
-  destructor TAppliciantManager.Destroy;
-  begin
-  	appliciants.Free;
-  end;
-
-	function TAppliciantManager.stringToEnum(feature_str : String;
-    	out Value : TFeature) : Boolean;
-	begin
-    Result := true;
-    if (feature_str = '0') or (feature_str = 'c') then Value := c
-    else if (feature_str = '1') or (feature_str = 'cpp') then Value := cpp
-    else if (feature_str = '2') or (feature_str = 'csharp') then Value := csharp
-    else if (feature_str = '3') or (feature_str = 'delphi') then Value := delphi
-    else if (feature_str = '4') or (feature_str = 'unity') then Value := unity
-    else if (feature_str = '5') or (feature_str = 'tcp') then Value := tcp
-    else if (feature_str = '6') or (feature_str = 'git') then Value := git
-    else Result := false;
-  end;
-
-  function TAppliciantManager.EnumToString(feature_value : TFeature) : String;
-  begin
-    case feature_value of
-    	c: Result := '0';
-    	cpp: Result := '1';
-      csharp: Result := '2';
-      delphi: Result := '3';
-      unity: Result := '4';
-      tcp: Result := '5';
-      git: Result := '6';
-
+function TAppliciantManager.findByName(Name: string): PAppliciant;
+var
+  i: byte;
+begin
+  for i := 0 to appliciants.Count - 1 do
+    if TAppliciant(appliciants[i]).GetName = Name then
+    begin
+      Result := appliciants[i];
+      exit;
     end;
-  end;
 
-  function TAppliciantManager.findByName(name : String) : PAppliciant;
-  var
-    i : byte;
+  Result := nil;
+
+end;
+
+procedure TAppliciantManager.ReadAppliciants;
+var
+  input: Text;
+  line: string[64];
+  feature_str: string[4];
+  feature_val: TFeature;
+  Name: string[16];
+  i: byte;
+  new_appliciant: TAppliciant;
+begin
+  AssignFile(input, 'appliciants.txt');
+  Reset(input);
+
+  while not EOF(input) do
   begin
-    for i := 0 to appliciants.Count-1 do
-      if TAppliciant(appliciants[i]).GetName = name then
-      begin
-        Result := appliciants[i];
-    	  exit;
-  	  end;
+    Readln(input, line);
 
-    Result := nil;
+    i := 1;
 
-  end;
+    Name := '';
+    while (line[i] <> ' ') and (i <= Length(line)) do
+    begin
+      Name := Name + line[i];
+      i := i + 1;
+    end;
 
-	procedure TAppliciantManager.ReadAppliciants;
- 	var
-  	input : Text;
-  	line : String[64];
-  	feature_str : String[4];
-    feature_val : TFeature;
-    name : String[16];
-  	i : byte;
-  	new_appliciant : TAppliciant;
-	begin
-		AssignFile(input, 'appliciants.txt');
-		Reset(input);
+    new_appliciant := TAppliciant.Create(Name);
 
-		while not eof(input) do
-		begin
-      Readln(input, line);
-
-      i := 1;
-
-      name := '';
+    while i <= Length(line) do
+    begin
+      feature_str := '';
       while (line[i] <> ' ') and (i <= Length(line)) do
       begin
-      	name := name + line[i];
+        feature_str := feature_str + line[i];
         i := i + 1;
       end;
 
-      new_appliciant := TAppliciant.Create(name);
+      stringToEnum(feature_str, feature_val);
+      new_appliciant.AddFeature(feature_val);
+      i := i + 1;
 
-      while i <= Length(line) do
-      begin
-			  feature_str := '';
-        while (line[i] <> ' ') and (i <= Length(line)) do
-        begin
-      	  feature_str := feature_str + line[i];
-          i := i + 1;
-        end;
+    end;
 
-        stringToEnum(feature_str, feature_val);
-        new_appliciant.AddFeature(feature_val);
-        i := i + 1;
+    appliciants.Add(new_appliciant);
 
-      end;
+  end;
 
-      appliciants.Add(new_appliciant);
-
-		end;
-
-	Close(input);
+  Close(input);
 end;
 
 procedure TAppliciantManager.WriteAppliciants;
 var
-  i : byte;
-  output : Text;
-  features : TFeatures;
-  feature : TFeature;
+  i: byte;
+  output: Text;
+  features: TFeatures;
+  feature: TFeature;
 begin
-	AssignFile(output, 'appliciants.txt');
+  AssignFile(output, 'appliciants.txt');
   Rewrite(output);
 
-  for i := 0 to appliciants.Count-1 do
+  for i := 0 to appliciants.Count - 1 do
   begin
     Write(output, TAppliciant(appliciants[i]).GetName);
-  	features := TAppliciant(appliciants[i]).DoInterview;
+    features := TAppliciant(appliciants[i]).DoInterview;
     for feature in features do
     begin
-    	Write(output, ' ');
+      Write(output, ' ');
       Write(output, EnumToString(feature));
     end;
 
@@ -156,30 +167,30 @@ begin
 
   end;
 
-	Close(output);
+  Close(output);
 end;
 
 procedure TAppliciantManager.ListAppliciants;
-	var
-    i : byte;
+var
+  i: byte;
 begin
-  for i := 0 to appliciants.Count-1 do
-  	Writeln(TAppliciant(appliciants[i]).GetName);
+  for i := 0 to appliciants.Count - 1 do
+    Writeln(TAppliciant(appliciants[i]).GetName);
   Writeln('');
 end;
 
-procedure TAppliciantManager.Interview(dataqua : TDataquaExample);
+procedure TAppliciantManager.Interview(dataqua: TDataquaExample);
 var
-  name : String[16];
-  appliciant : PAppliciant;
+  Name: string[16];
+  appliciant: PAppliciant;
 begin
   Writeln('Add name of the appliciant');
-  Readln(name);
+  Readln(Name);
 
-  appliciant := FindByName(name);
+  appliciant := FindByName(Name);
 
   if appliciant <> nil then
-  	dataqua.startInterview(TAppliciant(appliciant))
+    dataqua.startInterview(TAppliciant(appliciant))
   else
     Writeln('Appliciant not found');
 
@@ -188,9 +199,9 @@ end;
 
 procedure TAppliciantManager.AddAppliciant;
 var
-  input : String[16];
-  appliciant : TAppliciant;
-  feature : TFeature;
+  input: string[16];
+  appliciant: TAppliciant;
+  feature: TFeature;
 begin
   Writeln('Add name of the appliciant');
   Readln(input);
@@ -202,7 +213,7 @@ begin
     Readln(input);
 
     if StringToEnum(input, feature) then
-    	appliciant.AddFeature(feature)
+      appliciant.AddFeature(feature)
     else
       Writeln('Invalid feature');
 
@@ -213,8 +224,8 @@ end;
 
 procedure TAppliciantManager.DeleteAppliciant;
 var
-  input : String[16];
-  appliciant : PAppliciant;
+  input: string[16];
+  appliciant: PAppliciant;
 begin
   Writeln('Add name of the appliciant');
   Readln(input);
@@ -222,12 +233,12 @@ begin
   appliciant := FindByName(input);
 
   if appliciant <> nil then
-  	appliciants.Remove(appliciant)
+    appliciants.Remove(appliciant)
   else
     Writeln('Appliciant not found');
 
-	Writeln('');
+  Writeln('');
 
 end;
-end.
 
+end.

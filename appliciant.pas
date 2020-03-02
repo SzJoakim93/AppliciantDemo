@@ -9,40 +9,41 @@ uses
 
 type
   TFeature = (c, cpp, csharp, delphi, tcp, unity, git);
-  TFeatures = Set of TFeature;
+  TFeatures = set of TFeature;
 
-type TAppliciant = class
+type
+  TAppliciant = class
 
-private
-  Name : String[16];
-  Features : TFeatures;
-public
-  constructor Create(_name : String);
-	function DoInterview : TFeatures;
-  function GetName : String;
-  procedure AddFeature(new_feature : TFeature);
-end;
+  private
+    Name: string[16];
+    Features: TFeatures;
+  public
+    constructor Create(_name: string);
+    function DoInterview: TFeatures;
+    function GetName: string;
+    procedure AddFeature(new_feature: TFeature);
+  end;
 
 implementation
-	constructor TAppliciant.Create(_name : String);
-  begin
-    self.Name := _name;
-  end;
 
-	function TAppliciant.DoInterview : TFeatures;
-  begin
-		Result := Features;
-  end;
+constructor TAppliciant.Create(_name: string);
+begin
+  self.Name := _name;
+end;
 
-  function TAppliciant.GetName : String;
-  begin
-    Result := name;
-  end;
+function TAppliciant.DoInterview: TFeatures;
+begin
+  Result := Features;
+end;
 
-	procedure TAppliciant.AddFeature(new_feature : TFeature);
-  begin
-    Include(Features, new_feature);
-  end;
+function TAppliciant.GetName: string;
+begin
+  Result := Name;
+end;
+
+procedure TAppliciant.AddFeature(new_feature: TFeature);
+begin
+  Include(Features, new_feature);
+end;
 
 end.
-

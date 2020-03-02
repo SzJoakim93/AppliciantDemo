@@ -7,16 +7,16 @@ uses
   AppliciantManager;
 
 var
-	dataqua : TDataquaExample;
-  appliciant_manager : TAppliciantManager;
-  option : byte;
-  quit : boolean;
+  dataqua: TDataquaExample;
+  appliciant_manager: TAppliciantManager;
+  option: byte;
+  quit: boolean;
 
 begin
   dataqua := TDataquaExample.Create([c, cpp, delphi]);
   appliciant_manager := TAppliciantManager.Create;
   appliciant_manager.ReadAppliciants;
-  quit := false;
+  quit := False;
 
   while not quit do
   begin
@@ -33,7 +33,7 @@ begin
       2: appliciant_manager.Interview(dataqua);
       3: appliciant_manager.AddAppliciant;
       4: appliciant_manager.DeleteAppliciant;
-      5: quit := true;
+      5: quit := True;
     end;
   end;
 
